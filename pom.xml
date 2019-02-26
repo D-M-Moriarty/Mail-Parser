@@ -158,10 +158,10 @@
   </developers>
   <!-- **** Source Control Manager **** -->
   <scm>
-    <connection>scm:git:git@github.com:D-M-Moriarty/Mail-Parser.git</connection>
-    <developerConnection>scm:git:git@github.com:D-M-Moriarty/Mail-Parser.git</developerConnection>
+    <connection>scm:git:ssh://git@github.com:D-M-Moriarty/Mail-Parser.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:D-M-Moriarty/Mail-Parser.git</developerConnection>
     <url>https://github.com/D-M-Moriarty/Mail-Parser.git</url>
-    <tag>HEAD</tag>
+    <tag>0.1.32</tag>
   </scm>
 
   <!-- **** Dependencies **** -->
