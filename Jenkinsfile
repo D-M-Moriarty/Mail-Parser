@@ -100,61 +100,18 @@ pipeline {
                 }
             }
         }
-        stage('Promote') {
+        stage('Promote to google cloud') {
             when {
                 expression {
                     return params.promote == true
                 }
             }
             steps {
-                script {
-                    sshagent(credentials: ['269031bb-f19f-45f0-b6b8-c878e67a087d']) {
-
-                        sh 'git checkout ' + stripOrigin("${params.branch}")
-                        sh 'git fetch --all'
-
-                        TAGS = sh(script: "git tag -l --sort=-creatordate | head -n10", returnStdout: true).trim()
-
-                        CHOSEN_RELEASE = input id: 'Tag',
-                                message: 'Choose a version to promote',
-                                parameters: [
-                                        choice(choices: "${TAGS}",
-                                                description: "Please choose one.",
-                                                name: "CHOOSE_RELEASE")
-                                ]//,
-                        //submitter: 'root, dmoriarty', submitterParameter: 'tag'
-
-                        sh "echo ${CHOSEN_RELEASE}"
-                        // set file for reboot
-                        sh '#!/bin/bash\n' +
-                                'ssh ec2-user@pbm << _EOF_\n' +
-                                "  sudo echo -e '#!/bin/bash\n" +
-                                "  release_version=${CHOSEN_RELEASE}\n" +
-                                "  sudo systemctl start docker.service\n" +
-                                "  cd /home/ec2-user\n" +
-                                '  docker-compose stop\n' +
-                                '  docker-compose pull\n' +
-                                '  docker-compose up -d\n' +
-                                "' > '/etc/init.d/initScript.sh'\n" +
-                                "_EOF_"
-                        // set file for new session
-                        sh '#!/bin/bash\n' +
-                                'ssh ec2-user@pbm << _EOF_\n' +
-                                "  sudo echo -e '#!/bin/bash\n" +
-                                "  release_version=${CHOSEN_RELEASE}\n" +
-                                "' > '/etc/profile.d/newSession.sh'\n" +
-                                "_EOF_"
-                        // restart docker containers
-                        sh '#!/bin/bash\n' +
-                                'ssh ec2-user@pbm << EOF\n' +
-                                '  cd /home/ec2-user\n' +
-                                '  docker-compose stop\n' +
-                                '  docker-compose pull\n' +
-                                '  docker-compose up -d\n' +
-                                'EOF'
+                    dir('deployment'){ //do this in the deployment directory!
+                        echo 'Deploying to test'
+                        sh 'ansible-playbook -i hosts docker-setup.yml'
                     }
                 }
-            }
         }
     }
 }

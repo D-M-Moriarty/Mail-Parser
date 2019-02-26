@@ -1,0 +1,12 @@
+---
+- name: Configure docker and docker compose on AWS
+  hosts: server
+  become: True
+  gather_facts: True
+  roles:
+    - role: "nickjj.docker"
+      tags: ["docker"]
+  tasks:
+    - name: start up docker container
+      debugger: always
+      shell: docker run dmoriarty/pbm:latest
