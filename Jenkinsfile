@@ -107,9 +107,14 @@ pipeline {
                 }
             }
             steps {
-                    dir('deployment'){ //do this in the deployment directory!
-                        echo 'Deploying to test'
-                        sh 'ansible-playbook -i hosts docker-setup.yml'
+                    dir('deployment'){
+                        ansiblePlaybook([
+            inventory   : 'hosts',
+            playbook    : 'docker-setup.yml',
+            installation: 'ansible',
+        credentialsId: 'c0cc48f2-d914-46e1-b173-a979bce342e8',
+            colorized   : true
+          ])
                     }
                 }
         }
