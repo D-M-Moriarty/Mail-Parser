@@ -38,14 +38,14 @@
       with_items: "{{ gce.instance_data }}"
 
     - name: Configure Hosts
-      hosts: gce_instances_ips
-      become: yes
-      become_method: sudo
-      roles:
-        - role: "nickjj.docker"
-          tags: ["docker"]
-      tags:
-        - config
+        hosts: gce_instances_ips
+        become: yes
+        become_method: sudo
+        roles:
+          - role: "nickjj.docker"
+            tags: ["docker"]
+        tags:
+          - config
 
 #    - name: delete test-instances
 #      # Basic termination of instance.
