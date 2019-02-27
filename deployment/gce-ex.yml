@@ -35,14 +35,19 @@
         timeout: 30
       with_items: "{{ gce.instance_data }}"
 
-- name: Configure Hosts
+- name: Configure docker and docker compose on Hosts
   hosts: gce_instances_ips
   become: yes
   become_method: sudo
+  connection: ssh
+  gather_facts: True
   roles:
     - role: "nickjj.docker"
-  tags:
-    - ["docker"]
+      tags: ["docker"]
+  tasks:
+    - name: start up docker container
+      debugger: always
+      shell: docker run dmoriarty/pbm:latest
 #
 #    - name: delete test-instances
 #      # Basic termination of instance.
