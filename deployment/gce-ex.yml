@@ -37,9 +37,8 @@
 
 - name: Configure docker and docker compose on Hosts
   hosts: gce_instances_ips
-  become: True
-  gather_facts: True
   connection: ssh
+  sudo: True
   roles:
     - role: "nickjj.docker"
       tags: ["docker"]
