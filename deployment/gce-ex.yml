@@ -39,6 +39,7 @@
   hosts: gce_instances_ips
   become: True
   gather_facts: True
+  connection: ssh
   roles:
     - role: "nickjj.docker"
       tags: ["docker"]
