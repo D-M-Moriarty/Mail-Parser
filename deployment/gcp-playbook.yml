@@ -1,8 +1,3 @@
-# Basic provisioning example.  Create a single Debian 8 instance in the
-# us-central1-a Zone of the n1-standard-1 machine type.
-# Create multiple instances by specifying multiple names, separated by
-# commas in the instance_names field
-# (e.g. my-test-instance1,my-test-instance2)
 ---
 - name: Create instances
   hosts: localhost
@@ -11,10 +6,10 @@
 
   vars:
     machine_type: custom-1-1024  # 1 core, 1.70Gi RAM - got from template created
-    image: centos-6
+    image: debian-8
     service_account_email: devops@t-isotope-161616.iam.gserviceaccount.com
     project_id: DevOps
-    zone: europe-west1-c
+    zone: us-west1-b
 
   tasks:
     - name: Launch instances
@@ -29,5 +24,29 @@
         project_id: "t-isotope-161616"
         disk_size: 32
       register: gce
+
+    - name: Wait for SSH to come up
+        wait_for: host={{ item.public_ip }} port=22 delay=5 timeout=100
+        with_items: gce.instance_data
+
+    - name: Add host to groupname
+        add_host: hostname={{ item.public_ip }} groupname=launched
+        with_items: gce.instance_data
+
+    - name: Configure instance(s)
+        hosts: launched
+        become: yes
+        pre_tasks:
+          - include_vars: "gce_vars/{{ env }}/vars_provision.yml"
+          - name: install selinux bindings
+            yum: name=libselinux-python state=present
+        roles:
+          # - geerlingguy.ntp
+          # - gce_epel_repo
+          - gce_provision_base
+          - gce_provision
+          - company_cdn_edge
+          - gce_end_conf
+
 
 
