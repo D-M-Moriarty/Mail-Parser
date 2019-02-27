@@ -3,9 +3,6 @@
   hosts: vagrant
   become: True
   gather_facts: True
-  pre_tasks:
-    - name: start vagrant boxes
-      command: 'vagrant up'
   roles:
     - role: "nickjj.docker"
       tags: ["docker"]
