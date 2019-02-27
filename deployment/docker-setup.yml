@@ -1,6 +1,6 @@
 ---
-- name: Configure docker and docker compose on AWS
-  hosts: server
+- name: Configure docker and docker compose on VM
+  hosts: vagrant
   become: True
   gather_facts: True
   roles:
@@ -10,3 +10,4 @@
     - name: start up docker container
       debugger: always
       shell: docker run dmoriarty/pbm:latest
+
