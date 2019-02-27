@@ -8,10 +8,8 @@
     project_id: "t-isotope-161616"
   tasks:
     - name: create multiple instances
-      # Basic provisioning example.  Create multiple Debian 8 instances in the
-      # us-central1-a Zone of n1-standard-1 machine type.
       gce:
-        instance_names: test1,test2,test3
+        instance_names: QAT,UAT,PROD
         zone: us-west1-b
         machine_type: n1-standard-1
         image: debian-8
@@ -37,15 +35,14 @@
         timeout: 30
       with_items: "{{ gce.instance_data }}"
 
-#    - name: Configure Hosts
-#      hosts: gce_instances_ips
-#      become: yes
-#      become_method: sudo
-#      roles:
-#        - my-role-one
-#        - my-role-two
-#      tags:
-#        - config
+    - name: Configure Hosts
+      hosts: gce_instances_ips
+      become: yes
+      become_method: sudo
+      roles:
+        - role: "nickjj.docker"
+      tags:
+        - ["docker"]
 #
 #    - name: delete test-instances
 #      # Basic termination of instance.
