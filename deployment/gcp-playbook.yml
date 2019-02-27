@@ -3,13 +3,31 @@
 # Create multiple instances by specifying multiple names, separated by
 # commas in the instance_names field
 # (e.g. my-test-instance1,my-test-instance2)
-gce:
-  instance_names: my-test-instance1
-  zone: us-central1-a
-  machine_type: n1-standard-1
-  image: debian-8
-  state: present
-  service_account_email: "devops@t-isotope-161616.iam.gserviceaccount.com"
-  credentials_file: "~/my_account.json"
-  project_id: "t-isotope-161616"
-  disk_size: 32
+---
+- name: Create instances
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  vars:
+    machine_type: custom-1-1024  # 1 core, 1.70Gi RAM - got from template created
+    image: centos-6
+    service_account_email: devops@t-isotope-161616.iam.gserviceaccount.com
+    project_id: DevOps
+    zone: europe-west1-c
+
+  tasks:
+    - name: Launch instances
+      gce:
+        instance_names: my-devops-instance1
+        zone: us-central1-a
+        machine_type: n1-standard-1
+        image: debian-8
+        state: present
+        service_account_email: "{{ service_account_email }}"
+        credentials_file: "~/my_account.json"
+        project_id: "t-isotope-161616"
+        disk_size: 32
+      register: gce
+
+
