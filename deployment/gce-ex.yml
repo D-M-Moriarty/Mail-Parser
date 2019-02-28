@@ -52,7 +52,7 @@
     - name: start up docker container
       debugger: always
       environment:
-        HOST: "{{ ansible_env.HOME }}"
+        HOST: "{{ ansible_hostname }}"
       command: docker-compose up -d
 #export HOST="{{ item.public_ip }}"
 #    - name: delete test-instances
