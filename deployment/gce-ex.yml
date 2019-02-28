@@ -36,10 +36,10 @@
       with_items: "{{ gce.instance_data }}"
 
     - authorized_key:
-        user: root
+        user: jenkins
         state: present
         manage_dir: yes
-        key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+        key: "{{ lookup('file', '/var/jenkins_home/.ssh/id_rsa.pub') }}"
 
 - name: Configure docker and docker compose on Hosts
   hosts: gce_instances_ips
