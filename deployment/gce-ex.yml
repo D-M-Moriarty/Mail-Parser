@@ -43,6 +43,10 @@
     - role: "nickjj.docker"
       tags: ["docker"]
   tasks:
+    - name: Ansible copy file to remote server
+        copy:
+          src: ./docker-compose.yml
+          dest: ~
     - name: start up docker container
       debugger: always
       shell: docker-compose up -d
