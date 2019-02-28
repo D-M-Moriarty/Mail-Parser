@@ -1,0 +1,60 @@
+---
+- name: Compute Engine Instance Examples
+  hosts: localhost
+  vars:
+    service_account_email: "devopstest@t-isotope-161616.iam.gserviceaccount.com"
+    credentials_file: "~/my_account.json"
+    project_id: "t-isotope-161616"
+    auth_kind: serviceaccount
+  tasks:
+    - name: create multiple instances
+      gce:
+        instance_names: a,b,c
+        zone: us-west1-b
+        machine_type: n1-standard-1
+        image: debian-8
+        state: present
+        service_account_email: "{{ service_account_email }}"
+        credentials_file: "{{ credentials_file }}"
+        project_id: "{{ project_id }}"
+        metadata: '{ "startup-script" : "apt-get update" }'
+      register: gce
+
+    - name: Save host data
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: gce_instances_ips
+      with_items: "{{ gce.instance_data }}"
+
+    - name: Wait for SSH for instances
+      wait_for:
+        delay: 1
+        host: "{{ item.public_ip }}"
+        port: 22
+        state: started
+        timeout: 30
+      with_items: "{{ gce.instance_data }}"
+
+- name: Configure docker and docker compose on Hosts
+  hosts: gce_instances_ips
+  become: True
+  gather_facts: True
+  roles:
+    - role: "nickjj.docker"
+      tags: ["docker"]
+  tasks:
+    - name: start up docker container
+      debugger: always
+      shell: docker run dmoriarty/pbm:latest
+#
+#    - name: delete test-instances
+#      # Basic termination of instance.
+#      gce:
+#        service_account_email: "{{ service_account_email }}"
+#        credentials_file: "{{ credentials_file }}"
+#        project_id: "{{ project_id }}"
+#        instance_names: "{{ gce.instance_names }}"
+#        zone: us-central1-a
+#        state: absent
+#      tags:
+#        - delete
