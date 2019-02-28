@@ -28,6 +28,14 @@ pipeline {
             steps {
                 sh 'mvn clean compile'
             }
+            post {
+                success {
+                    slackSend color: 'good', message: 'maven build success'
+                }
+                failure {
+                    slackSend color: 'bad', message: 'maven build failed'
+                }
+            }
         }
         stage('Testing') {
             steps {
@@ -36,6 +44,10 @@ pipeline {
             post {
                 success {
                     junit 'target/surefire-reports/**/*.xml'
+                    slackSend color: 'good', message: 'Testing success'
+                }
+                failure {
+                    slackSend color: 'bad', message: 'Testing failed'
                 }
             }
         }
@@ -43,6 +55,14 @@ pipeline {
             steps {
                 withSonarQubeEnv("SonarQube") {
                     sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.4.0.905:sonar'
+                }
+            }
+            post {
+                success {
+                    slackSend color: 'good', message: 'SonarQube analysis success'
+                }
+                failure {
+                    slackSend color: 'bad', message: 'SonarQube analysis failed'
                 }
             }
         }
@@ -56,11 +76,27 @@ pipeline {
                     }
                 }
             }
+            post {
+                success {
+                    slackSend color: 'good', message: 'SonarQube Gatekeeper success'
+                }
+                failure {
+                    slackSend color: 'bad', message: 'SonarQube Gatekeeper failed'
+                }
+            }
         }
         stage('Publish JaCoCo Reports') {
             steps {
                 script {
                     step([$class: 'JacocoPublisher', execPattern: '**/target/coverage-reports/*.exec'])
+                }
+            }
+            post {
+                success {
+                    slackSend color: 'good', message: 'JaCoCo Reports published'
+                }
+                failure {
+                    slackSend color: 'bad', message: 'JaCoCo Reports failed to publish'
                 }
             }
         }
@@ -82,6 +118,14 @@ pipeline {
                     publishBuildInfo server: server, buildInfo: buildInfo
                 }
             }
+            post {
+                success {
+                    slackSend color: 'good', message: 'Published jars to Artifactory'
+                }
+                failure {
+                    slackSend color: 'bad', message: 'Failed to Publish jars to Artifactory'
+                }
+            }
         }
         stage('Release') {
             when {
@@ -96,7 +140,14 @@ pipeline {
                         dockerImage.push()
                     }
                     sh "docker rmi $registry:$BUILD_NUMBER"
-
+                }
+            }
+            post {
+                success {
+                    slackSend color: 'good', message: 'Docker image built, tagged and pushed to docker hub'
+                }
+                failure {
+                    slackSend color: 'bad', message: 'Release stage failed'
                 }
             }
         }
@@ -116,9 +167,31 @@ pipeline {
                         colorized   : true
                       ])
                     }
-                }
+            }
+        }
+        post {
+            success {
+                slackSend color: 'good', message: 'Promoted to environment'
+            }
+            failure {
+                slackSend color: 'bad', message: 'Failed to promote'
+            }
         }
     }
+    post {
+           // only triggered when blue or green sign
+           success {
+               slackSend color: 'good', message: 'build success'
+           }
+           // triggered when red sign
+           failure {
+               slackSend color: 'bad', message: 'build failed'
+           }
+           // trigger every-works
+           always {
+               slackSend color: 'always', message: "${currentBuild.result}"
+           }
+        }
 }
 
 def static stripOrigin(String branch) {

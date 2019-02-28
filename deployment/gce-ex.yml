@@ -1,5 +1,4 @@
 ---
-# Example Playbook
 - name: Compute Engine Instance Examples
   hosts: localhost
   vars:
@@ -36,25 +35,9 @@
         timeout: 30
       with_items: "{{ gce.instance_data }}"
 
-    - authorized_key:
-        user: jenkins
-        state: present
-        manage_dir: yes
-        key: "{{ lookup('file', '/var/jenkins_home/.ssh/id_rsa.pub') }}"
-
 - name: Configure docker and docker compose on Hosts
   hosts: gce_instances_ips
   become: True
-  vars:
-    auth_kind: serviceaccount
-  #  gather_facts: True
-  pre_tasks:
-    - wait_for:
-        delay: 1
-        host: "{{ item.public_ip }}"
-        port: 22
-        state: started
-        timeout: 30
   roles:
     - role: "nickjj.docker"
       tags: ["docker"]
