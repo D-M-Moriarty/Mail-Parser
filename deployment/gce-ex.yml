@@ -51,7 +51,9 @@
         mode: 0644
     - name: start up docker container
       debugger: always
-      shell: export HOST="${HOSTNAME}" && docker-compose down && docker-compose pull && docker-compose up -d
+      environment:
+        HOST: "{{ item.instance_names }}"
+      shell: shell: export HOST="{{ item.public_ip }}" && docker-compose down && docker-compose pull && docker-compose up -d
 #
 #    - name: delete test-instances
 #      # Basic termination of instance.
