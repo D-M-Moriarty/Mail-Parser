@@ -2,7 +2,7 @@ version: '3'
 services:
 
   pbm:
-    image: ec2-18-216-191-133.us-east-2.compute.amazonaws.com:5000/pbm:${release_version}
+    image: dmoriarty/pbm:latest
     container_name: pbm
     depends_on:
       - rabbitmq

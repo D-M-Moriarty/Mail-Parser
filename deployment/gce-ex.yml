@@ -45,7 +45,7 @@
   tasks:
     - name: start up docker container
       debugger: always
-      shell: docker run dmoriarty/pbm:latest
+      shell: docker-compose up -d
 #
 #    - name: delete test-instances
 #      # Basic termination of instance.
