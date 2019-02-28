@@ -1,5 +1,5 @@
 [all:vars]
-ansible_user=darrenmoriarty
+ansible_user=darren.m.moriarty
 
 [google_cloud]
 gcloud = ansible_host=35.185.208.213 ansible_port=2222
