@@ -37,7 +37,6 @@
 
 - name: Configure docker and docker compose on Hosts
   hosts: gce_instances_ips
-  connection: ssh
   become: yes
   gather_facts: True
   roles:
