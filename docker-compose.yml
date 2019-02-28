@@ -12,7 +12,7 @@ services:
     networks:
       - pbmnet
     environment:
-      - SPRING_ACTIVE_PROFILE=${hostname}
+      - SPRING_ACTIVE_PROFILE="${hostname}"
     volumes:
       - ./target/classes/application.properties:/pbm/application.properties:ro
 
