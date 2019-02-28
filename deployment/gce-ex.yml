@@ -46,7 +46,9 @@
     - name: Ansible copy file to remote server
       copy:
         src: ../docker-compose.yml
-        dest: /home/darrenmoriarty
+        dest: /home/darren.m.moriarty
+        owner: darren.m.moriarty
+        mode: 0644
     - name: start up docker container
       debugger: always
       shell: docker-compose up -d
