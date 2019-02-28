@@ -39,6 +39,13 @@
   hosts: gce_instances_ips
   become: True
   gather_facts: True
+  pre_tasks:
+    - wait_for:
+        delay: 1
+        host: "{{ item.public_ip }}"
+        port: 22
+        state: started
+        timeout: 30
   roles:
     - role: "nickjj.docker"
       tags: ["docker"]
