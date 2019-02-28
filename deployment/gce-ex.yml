@@ -51,7 +51,9 @@
         mode: 0644
     - name: start up docker container
       debugger: always
-      shell: HOST=hostname && docker-compose up -d
+      environment:
+        HOST: hostname
+      shell: docker-compose up -d
 #
 #    - name: delete test-instances
 #      # Basic termination of instance.
