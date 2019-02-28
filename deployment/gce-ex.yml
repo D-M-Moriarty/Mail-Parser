@@ -38,7 +38,7 @@
 - name: Configure docker and docker compose on Hosts
   hosts: gce_instances_ips
   become: True
-  gather_facts: True
+  #  gather_facts: True
   pre_tasks:
     - wait_for:
         delay: 1
