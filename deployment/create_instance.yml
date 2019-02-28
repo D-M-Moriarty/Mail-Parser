@@ -79,5 +79,5 @@
   connection: ssh
   sudo: True
   roles:
-    - base_configuration
-    - production_server
+    - role: "nickjj.docker"
+      tags: ["docker"]
