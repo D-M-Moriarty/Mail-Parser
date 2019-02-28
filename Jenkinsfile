@@ -160,12 +160,12 @@ pipeline {
             steps {
                     dir('deployment'){
                         ansiblePlaybook([
-                        inventory   : 'hosts',
-                        playbook    : 'docker-setup.yml',
-                        installation: 'ansible',
-                        credentialsId: 'c0cc48f2-d914-46e1-b173-a979bce342e8',
-                        colorized   : true
-                      ])
+                            inventory   : 'hosts',
+                            playbook    : 'gce-ex.yml',
+                            installation: 'ansible',
+                            hostKeyChecking: false,
+                            colorized   : true
+                        ])
                     }
             }
         }
