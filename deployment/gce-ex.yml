@@ -55,7 +55,8 @@
       debugger: always
       environment:
         HOST: "{{ ansible_hostname }}"
-      shell: docker-compose up -d
+      docker_service:
+        - project_src: /home/darren.m.moriarty
 #export HOST="{{ item.public_ip }}"
 #    - name: delete test-instances
 #      # Basic termination of instance.
