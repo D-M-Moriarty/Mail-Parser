@@ -6,6 +6,7 @@
     service_account_email: "devops@t-isotope-161616.iam.gserviceaccount.com"
     credentials_file: "~/my_account.json"
     project_id: "t-isotope-161616"
+    auth_kind: serviceaccount
   tasks:
     - name: create multiple instances
       gce:
@@ -44,6 +45,8 @@
 - name: Configure docker and docker compose on Hosts
   hosts: gce_instances_ips
   become: True
+  vars:
+    auth_kind: serviceaccount
   #  gather_facts: True
   pre_tasks:
     - wait_for:
@@ -53,6 +56,7 @@
         state: started
         timeout: 30
   roles:
+    - auth_kind: "{{ auth_kind }}"
     - role: "nickjj.docker"
       tags: ["docker"]
   tasks:
