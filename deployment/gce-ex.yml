@@ -45,7 +45,7 @@
   tasks:
     - name: Ansible copy file to remote server
       copy:
-        src: ./docker-compose.yml
+        src: .docker-compose.yml
         dest: /home/darrenmoriarty
     - name: start up docker container
       debugger: always
