@@ -56,7 +56,6 @@
         state: started
         timeout: 30
   roles:
-    - auth_kind: "{{ auth_kind }}"
     - role: "nickjj.docker"
       tags: ["docker"]
   tasks:
