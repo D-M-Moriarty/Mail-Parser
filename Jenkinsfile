@@ -168,15 +168,16 @@ pipeline {
                         ])
                     }
             }
-        }
-        post {
-            success {
-                slackSend color: 'good', message: 'Promoted to environment'
+            post {
+                success {
+                    slackSend color: 'good', message: 'Promoted to environment'
+                }
+                failure {
+                    slackSend color: 'bad', message: 'Failed to promote'
+                }
             }
-            failure {
-                slackSend color: 'bad', message: 'Failed to promote'
-            }
         }
+
     }
     post {
            // only triggered when blue or green sign
@@ -191,7 +192,7 @@ pipeline {
            always {
                slackSend color: 'always', message: "${currentBuild.result}"
            }
-        }
+    }
 }
 
 def static stripOrigin(String branch) {

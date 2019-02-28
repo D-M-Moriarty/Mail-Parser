@@ -8,11 +8,10 @@ services:
       - rabbitmq
     environment:
       - RABBITMQ_HOST_URL=rabbitmq
+      - SPRING_ACTIVE_PROFILE="${HOST}"
     command: ["./wait-for-it.sh", "rabbitmq:5672"]
     networks:
       - pbmnet
-    environment:
-      - SPRING_ACTIVE_PROFILE="${HOST}"
     volumes:
       - ./target/classes/application.properties:/pbm/application.properties:ro
 

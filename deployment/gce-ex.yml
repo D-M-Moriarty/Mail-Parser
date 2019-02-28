@@ -1,5 +1,5 @@
 ---
-- name: Compute Engine Instance Examples
+- name: Create Google Cloud PLatform Compute Engine Instances
   hosts: localhost
   vars:
     service_account_email: "devops@t-isotope-161616.iam.gserviceaccount.com"
@@ -9,7 +9,7 @@
   tasks:
     - name: create multiple instances
       gce:
-        instance_names: qat,uat,prod
+        instance_names: qat, uat, prod
         zone: us-west1-b
         machine_type: n1-standard-1
         image: debian-8
@@ -43,17 +43,19 @@
     - role: "nickjj.docker"
       tags: ["docker"]
   tasks:
+    -
     - name: Ansible copy file to remote server
       copy:
         src: ../docker-compose.yml
         dest: /home/darren.m.moriarty
         owner: darren.m.moriarty
         mode: 0644
-    - name: start up docker container
+
+    - name: start up docker containers
       debugger: always
       environment:
         HOST: "{{ ansible_hostname }}"
-      command: docker-compose up -d
+      shell: docker-compose up -d
 #export HOST="{{ item.public_ip }}"
 #    - name: delete test-instances
 #      # Basic termination of instance.
