@@ -53,8 +53,8 @@
       debugger: always
       environment:
         HOST: "{{ item.instance_names }}"
-      shell: shell: export HOST="{{ item.public_ip }}" && docker-compose down && docker-compose pull && docker-compose up -d
-#
+      shell: shell: docker-compose down && docker-compose pull && docker-compose up -d
+#export HOST="{{ item.public_ip }}"
 #    - name: delete test-instances
 #      # Basic termination of instance.
 #      gce:
