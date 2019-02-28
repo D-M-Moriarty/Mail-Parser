@@ -52,7 +52,7 @@
     - name: start up docker container
       debugger: always
       environment:
-        HOST: "${hostname}"
+        HOST: hostname
       shell: docker-compose up -d
 #
 #    - name: delete test-instances
