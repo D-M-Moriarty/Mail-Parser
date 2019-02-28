@@ -7,6 +7,4 @@ vagrant2 ansible_host=127.0.0.1 ansible_port=2200
 vagrant3 ansible_host=127.0.0.1 ansible_port=2201
 
 [gce_instances_ips]
-qat ansible_connection=ssh ansible_user=jenkins
-uat ansible_connection=ssh ansible_user=jenkins
-prod ansible_connection=ssh ansible_user=jenkins
+gce_instances_ips ansible_connection=ssh ansible_user=jenkins
