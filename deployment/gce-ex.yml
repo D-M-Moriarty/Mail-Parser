@@ -51,9 +51,8 @@
         mode: 0644
     - name: start up docker container
       debugger: always
-      shell: export HOST="${HOSTNAME}"
-      args:
-        executable: /bin/bash
+      environment:
+        HOST: "{{ ansible_env.HOME }}"
       command: docker-compose up -d
 #export HOST="{{ item.public_ip }}"
 #    - name: delete test-instances
