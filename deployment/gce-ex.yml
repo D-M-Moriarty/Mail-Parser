@@ -51,14 +51,13 @@
         owner: darren.m.moriarty
         mode: 0644
 
-    - name: set hostname
+    - name: start up docker containers
       debugger: always
       environment:
         HOST: "{{ ansible_hostname }}"
-
-    - name: Docker-Compose
       docker_service:
         project_src: /home/darren.m.moriarty
+
 #export HOST="{{ item.public_ip }}"
 #    - name: delete test-instances
 #      # Basic termination of instance.
