@@ -51,7 +51,7 @@
         mode: 0644
     - name: start up docker container
       debugger: always
-      command: export HOST=hostname
+      command: export HOST=${hostname}
       shell: docker-compose up -d
 #
 #    - name: delete test-instances
