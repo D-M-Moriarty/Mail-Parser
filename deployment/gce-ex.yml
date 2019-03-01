@@ -12,7 +12,7 @@
         instance_names: qat,uat,prod
         zone: us-west1-b
         machine_type: n1-standard-1
-        image: ubuntu-1804-lts
+        image: ubuntu-1804-bionic-v20190212a
         state: present
         service_account_email: "{{ service_account_email }}"
         credentials_file: "{{ credentials_file }}"
