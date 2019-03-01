@@ -44,7 +44,6 @@
   environment:
     PYTHONPATH: "{{ lookup('env','PYTHONPATH') }}:/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages"
   roles:
-    - role: "dronze4slack"
     - role: "nickjj.docker"
       tags: ["docker"]
   tasks:
