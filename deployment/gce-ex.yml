@@ -43,12 +43,12 @@
     #    - role: "nickjj.docker"
     #      tags: ["docker"]
     - geerlingguy.pip
-  #    - role: geerlingguy.docker
-  #      docker_service_state: started
-  #      docker_service_enabled: true
-  #      docker_install_compose: true
-  #      docker_users:
-  #        - darren.m.moriarty
+        - role: geerlingguy.docker
+        docker_service_state: started
+        docker_service_enabled: true
+        docker_install_compose: true
+        docker_users:
+          - darren.m.moriarty
   tasks:
     -
     - name: Ansible copy file to remote server
@@ -58,16 +58,16 @@
         owner: darren.m.moriarty
         mode: 0644
 
-    - name: Pip install docker for Ansible's docker_login and docker_service modules
-      pip:
-        name: ["docker", "docker-compose"]
-
-    - name: add user to docker group
-      user:
-        name: darren.m.moriarty
-        append: yes
-        groups: docker
-      become: true
+    #    - name: Pip install docker for Ansible's docker_login and docker_service modules
+    #      pip:
+    #        name: ["docker", "docker-compose"]
+    #
+    #    - name: add user to docker group
+    #      user:
+    #        name: darren.m.moriarty
+    #        append: yes
+    #        groups: docker
+    #      become: true
 
     - name: docker compose please
       docker_service:
