@@ -39,32 +39,17 @@
   hosts: gce_instances_ips
   become: True
   gather_facts: True
-  vars:
-    docker_ecs_login_password: "{{ lookup('env','ECS_LOGIN_PASSWORD') }}"
-  environment:
-    PYTHONPATH: "{{ lookup('env','PYTHONPATH') }}:/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages"
   roles:
     - role: "nickjj.docker"
       tags: ["docker"]
   tasks:
-    -
+
     - name: Ansible copy file to remote server
       copy:
         src: ../docker-compose.yml
         dest: /home/darren.m.moriarty
         owner: darren.m.moriarty
         mode: 0644
-
-    #    #    #This is because new versions of python modules docker and docker-py that ansible
-    #    ##    uses are incompatible. I had to revert back and explicitly specify the following versions of PIP packages:
-    #    - name: install certain python modules for docker
-    #      pip:
-    #        name: "{{ item.name }}"
-    #        version: "{{ item.version }}"
-    #        state: present
-    #      with_items:
-    #        - { name: docker, version: 2.0.0 }
-    #        - { name: docker-py, version: 1.10.6 }
 
     - name: start up docker containers
       debugger: always
