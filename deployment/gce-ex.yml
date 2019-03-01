@@ -40,37 +40,39 @@
   become: True
   gather_facts: True
   roles:
+    #    - role: "nickjj.docker"
+    #      tags: ["docker"]
     - geerlingguy.pip
     - role: geerlingguy.docker
       docker_service_state: started
       docker_service_enabled: true
       docker_install_compose: true
       docker_users:
-        - "{{ ansible_hostname }}"
+        - darren.m.moriarty
   tasks:
     -
     - name: Ansible copy file to remote server
+      environment:
+        HOST: "{{ ansible_hostname }}"
       copy:
         src: ../docker-compose.yml
         dest: /home/darren.m.moriarty
         owner: darren.m.moriarty
         mode: 0644
 
-    #    - name: set HOST variable
-    #      debugger: always
-    #      environment:
-    #        HOST: "{{ ansible_hostname }}"
-
     - name: Pip install docker for Ansible's docker_login and docker_service modules
-      debugger: always
-      environment:
-        HOST: "{{ ansible_hostname }}"
       pip:
         name: ["docker", "docker-compose"]
 
     - docker_service:
         project_src: /home/darren.m.moriarty
         state: present
+
+#    - name: start up docker containers
+#      debugger: always
+#      environment:
+#        HOST: "{{ ansible_hostname }}"
+#      shell: docker-compose up
 #      args:
 #        executable: /bin/bash
 #export HOST="{{ item.public_ip }}"
