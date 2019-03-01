@@ -12,7 +12,7 @@
         instance_names: qat,uat,prod
         zone: us-west1-b
         machine_type: n1-standard-1
-        image: debian-8
+        image: ubuntu-1804-lts
         state: present
         service_account_email: "{{ service_account_email }}"
         credentials_file: "{{ credentials_file }}"
@@ -49,8 +49,9 @@
       docker_install_compose: true
       docker_users:
         - darren.m.moriarty
+        - "{{ ansible_hostname }}"
   tasks:
-    -
+
     - name: Ansible copy file to remote server
       copy:
         src: ../docker-compose.yml
@@ -58,9 +59,9 @@
         owner: darren.m.moriarty
         mode: 0644
 
-    #    - name: Pip install docker for Ansible's docker_login and docker_service modules
-    #      pip:
-    #        name: ["docker", "docker-compose"]
+    - name: Pip install docker for Ansible's docker_login and docker_service modules
+      pip:
+        name: ["docker", "docker-compose"]
     #
     #    - name: add user to docker group
     #      user:
