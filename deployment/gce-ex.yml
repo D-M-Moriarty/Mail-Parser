@@ -43,7 +43,7 @@
     - role: "nickjj.docker"
       tags: ["docker"]
   tasks:
-
+    -
     - name: Ansible copy file to remote server
       copy:
         src: ../docker-compose.yml
@@ -55,10 +55,7 @@
       debugger: always
       environment:
         HOST: "{{ ansible_hostname }}"
-      command: sudo docker-compose up -d
-#      docker_service:
-#        project_src: /home/darren.m.moriarty
-
+      shell: docker-compose up -d
 #export HOST="{{ item.public_ip }}"
 #    - name: delete test-instances
 #      # Basic termination of instance.
