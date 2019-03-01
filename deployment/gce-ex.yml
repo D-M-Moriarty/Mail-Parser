@@ -40,8 +40,8 @@
   become: True
   gather_facts: True
   roles:
-    - geerlingguy.pip
-    - role: geerlingguy.docker
+    - role: "geerlingguy.pip"
+    - role: "geerlingguy.docker"
       docker_service_state: started
       docker_service_enabled: true
       docker_install_compose: true
