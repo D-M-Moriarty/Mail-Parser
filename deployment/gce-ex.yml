@@ -12,7 +12,7 @@
         instance_names: qat,uat,prod
         zone: us-west1-b
         machine_type: n1-standard-1
-        image: ubuntu-18
+        image: debian-9
         state: present
         service_account_email: "{{ service_account_email }}"
         credentials_file: "{{ credentials_file }}"
@@ -37,7 +37,7 @@
 
 - name: Configure docker and docker compose on Hosts
   hosts: gce_instances_ips
-  become: False
+  become: True
   gather_facts: True
   roles:
     #    - role: "nickjj.docker"
