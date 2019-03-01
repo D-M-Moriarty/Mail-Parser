@@ -55,12 +55,7 @@
       debugger: always
       environment:
         HOST: "{{ ansible_hostname }}"
-      shell: |
-        set timeout 300
-        docker-compose up
-        exit 0
-      args:
-        executable: /usr/local/bin/docker-compose
+      shell: docker-compose up
 #export HOST="{{ item.public_ip }}"
 #    - name: delete test-instances
 #      # Basic termination of instance.
