@@ -56,6 +56,8 @@
       environment:
         HOST: "{{ ansible_hostname }}"
       shell: docker-compose up
+      args:
+        executable: /bin/bash
 #export HOST="{{ item.public_ip }}"
 #    - name: delete test-instances
 #      # Basic termination of instance.
