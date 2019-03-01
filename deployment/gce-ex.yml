@@ -43,12 +43,12 @@
     #    - role: "nickjj.docker"
     #      tags: ["docker"]
     - geerlingguy.pip
-        - role: geerlingguy.docker
-        docker_service_state: started
-        docker_service_enabled: true
-        docker_install_compose: true
-        docker_users:
-          - darren.m.moriarty
+    - role: geerlingguy.docker
+    docker_service_state: started
+    docker_service_enabled: true
+    docker_install_compose: true
+    docker_users:
+      - darren.m.moriarty
   tasks:
     -
     - name: Ansible copy file to remote server
