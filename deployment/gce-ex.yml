@@ -56,12 +56,15 @@
         owner: darren.m.moriarty
         mode: 0644
 
-    - name: set HOST variable
+    #    - name: set HOST variable
+    #      debugger: always
+    #      environment:
+    #        HOST: "{{ ansible_hostname }}"
+
+    - name: Pip install docker for Ansible's docker_login and docker_service modules
       debugger: always
       environment:
         HOST: "{{ ansible_hostname }}"
-
-    - name: Pip install docker for Ansible's docker_login and docker_service modules
       pip:
         name: ["docker", "docker-compose"]
 
