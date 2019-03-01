@@ -57,14 +57,14 @@
 
     #    #This is because new versions of python modules docker and docker-py that ansible
     ##    uses are incompatible. I had to revert back and explicitly specify the following versions of PIP packages:
-          - name: install certain python modules for docker
-            pip:
-              name: "{{ item.name }}"
-              version: "{{ item.version }}"
-              state: present
-            with_items:
-              - { name: docker, version: 2.0.0 }
-              - { name: docker-py, version: 1.10.6 }
+    - name: install certain python modules for docker
+      pip:
+        name: "{{ item.name }}"
+        version: "{{ item.version }}"
+        state: present
+      with_items:
+        - { name: docker, version: 2.0.0 }
+        - { name: docker-py, version: 1.10.6 }
 
     - name: start up docker containers
       debugger: always
