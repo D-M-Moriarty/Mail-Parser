@@ -39,10 +39,10 @@
   hosts: gce_instances_ips
   become: True
   gather_facts: True
-    vars:
-      docker_ecs_login_password: "{{ lookup('env','ECS_LOGIN_PASSWORD') }}"
-    environment:
-      PYTHONPATH: "{{ lookup('env','PYTHONPATH') }}:/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages"
+  vars:
+    docker_ecs_login_password: "{{ lookup('env','ECS_LOGIN_PASSWORD') }}"
+  environment:
+    PYTHONPATH: "{{ lookup('env','PYTHONPATH') }}:/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages"
   roles:
     - role: "nickjj.docker"
       tags: ["docker"]
