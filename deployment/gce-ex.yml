@@ -62,6 +62,13 @@
       pip:
         name: ["docker", "docker-compose"]
 
+    - name: add user to docker group
+        user:
+          name: darren.m.moriarty
+          append: yes
+          groups: docker
+        become: true
+
     - name: docker compose please
       docker_service:
         project_src: /home/darren.m.moriarty
