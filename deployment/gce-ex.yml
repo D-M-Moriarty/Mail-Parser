@@ -52,8 +52,6 @@
   tasks:
     -
     - name: Ansible copy file to remote server
-      environment:
-        HOST: "{{ ansible_hostname }}"
       copy:
         src: ../docker-compose.yml
         dest: /home/darren.m.moriarty
@@ -64,9 +62,13 @@
       pip:
         name: ["docker", "docker-compose"]
 
-    - docker_service:
+    - name: docker compose please
+      docker_service:
         project_src: /home/darren.m.moriarty
         state: present
+        recreate: always
+      environment:
+        HOST: "{{ ansible_hostname }}"
 
 #    - name: start up docker containers
 #      debugger: always
