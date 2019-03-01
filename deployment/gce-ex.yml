@@ -58,9 +58,9 @@
         owner: darren.m.moriarty
         mode: 0644
 
-    - name: Pip install docker for Ansible's docker_login and docker_service modules
-      pip:
-        name: ["docker", "docker-compose"]
+    #    - name: Pip install docker for Ansible's docker_login and docker_service modules
+    #      pip:
+    #        name: ["docker", "docker-compose"]
 
     - name: docker compose please
       docker_service:
