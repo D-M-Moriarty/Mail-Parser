@@ -11,10 +11,6 @@
       <pattern>\n%d{yyyy-MM-dd HH:mm:ss} \n%-5level \n%logger{36} \n-> %msg%n</pattern>
     </layout>
   </Appender>
-
-  <!--<logger name="pbmClassLogger">-->
-    <!--<appender-ref ref="pbmAppender" />-->
-  <!--</logger>-->
   <root>
     <appender-ref ref="pbmAppender"/>
   </root>
