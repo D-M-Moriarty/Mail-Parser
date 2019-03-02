@@ -11,7 +11,6 @@ import java.util.List;
 @Service
 public class PbmApi {
 
-    //    @Autowired
     private PbmApiService pbmApiService;
 
     private static final Logger logger = LoggerFactory.getLogger(PbmApi.class);
