@@ -158,15 +158,15 @@ pipeline {
                 }
             }
             steps {
-                dir('deployment'){
-                    ansiblePlaybook([
+                    dir('deployment'){
+                        ansiblePlaybook([
                             inventory   : 'hosts',
                             playbook    : 'create_vms_up_containers.yml',
                             installation: 'ansible',
                             hostKeyChecking: false,
                             colorized   : true
-                    ])
-                }
+                        ])
+                    }
             }
             post {
                 success {
@@ -180,18 +180,18 @@ pipeline {
 
     }
     post {
-        // only triggered when blue or green sign
-        success {
-            slackSend color: 'good', message: 'build success'
-        }
-        // triggered when red sign
-        failure {
-            slackSend color: 'bad', message: 'build failed'
-        }
-        // trigger every-works
-        always {
-            slackSend color: 'always', message: "${currentBuild.result}"
-        }
+           // only triggered when blue or green sign
+           success {
+               slackSend color: 'good', message: 'build success'
+           }
+           // triggered when red sign
+           failure {
+               slackSend color: 'bad', message: 'build failed'
+           }
+           // trigger every-works
+           always {
+               slackSend color: 'always', message: "${currentBuild.result}"
+           }
     }
 }
 
