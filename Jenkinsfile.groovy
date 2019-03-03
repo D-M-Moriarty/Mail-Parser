@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Testing') {
             steps {
-                sh 'mvn test integration-test verify'
+                sh 'mvn verify'
             }
             post {
                 success {
@@ -160,7 +160,7 @@ pipeline {
             steps {
                     dir('deployment'){
                         ansiblePlaybook([
-                            inventory   : 'hosts.ini',
+                            inventory   : 'hosts',
                             playbook    : 'create_vms_up_containers.yml',
                             installation: 'ansible',
                             hostKeyChecking: false,
