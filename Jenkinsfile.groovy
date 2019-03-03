@@ -114,7 +114,7 @@ pipeline {
                     rtMaven.tool = 'maven'
                     rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
                     rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
-                    rtMaven.run pom: 'pom.xml', goals: 'install -U', buildInfo: buildInfo
+                    rtMaven.run pom: 'pom.xml', goals: 'compile -U', buildInfo: buildInfo
                     publishBuildInfo server: server, buildInfo: buildInfo
                 }
             }

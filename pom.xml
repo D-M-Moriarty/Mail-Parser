@@ -195,11 +195,6 @@
       <version>${version.dependency.slack-webhook}</version>
     </dependency>
     <dependency>
-      <groupId>com.splunk.logging</groupId>
-      <artifactId>splunk-library-javalogging</artifactId>
-      <version>${version.dependency.splunk-javalogging}</version>
-    </dependency>
-    <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>${version.dependency.logback}</version>
@@ -228,11 +223,6 @@
       <groupId>com.googlecode.json-simple</groupId>
       <artifactId>json-simple</artifactId>
       <version>${version.dependency.json-simple}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.splunk</groupId>
-      <artifactId>splunk</artifactId>
-      <version>${version.dependency.splunk}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -328,20 +318,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-openfeign</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-    </dependency>
-      <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-config -->
-      <dependency>
-          <groupId>org.springframework.cloud</groupId>
-          <artifactId>spring-cloud-starter-config</artifactId>
-      </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
@@ -369,7 +345,7 @@
         <executions>
           <execution>
             <id>build-image</id>
-            <phase>install</phase>
+            <phase>deploy</phase>
             <goals>
               <goal>build</goal>
             </goals>
