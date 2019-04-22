@@ -136,16 +136,6 @@
       <uniqueVersion>false</uniqueVersion>
       <url>https://docker.io/dmoriarty/</url>
     </repository>
-    <!--<repository>-->
-    <!--<id>art-central</id>-->
-    <!--<name>2b4845237730-releases</name>-->
-    <!--<url>http://10.120.16.26:8081/artifactory/libs-release-local</url>-->
-    <!--</repository>-->
-    <!--<snapshotRepository>-->
-    <!--<id>art-snapshots</id>-->
-    <!--<name>2b4845237730-snapshots</name>-->
-    <!--<url>http://10.120.16.26:8081/artifactory/libs-snapshot-local</url>-->
-    <!--</snapshotRepository>-->
   </distributionManagement>
 
   <!-- **** Team **** -->
@@ -337,10 +327,6 @@
           <serverId>docker-hub</serverId>
           <imageName>${docker.registry}/${project.artifactId}</imageName>
           <dockerDirectory>${project.basedir}</dockerDirectory>
-          <!--<repository>${docker.registry}:5000/${project.artifactId}</repository>-->
-          <!--<buildArgs>-->
-          <!--<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>-->
-          <!--</buildArgs>-->
         </configuration>
         <executions>
           <execution>
