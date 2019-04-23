@@ -67,7 +67,7 @@ pipeline {
         stage('Deploy Snapshots') {
             when {
                 expression {
-                    return params.branch == "origin/develop"
+                    return params.branch == "origin/art"
                 }
             }
             steps {
@@ -86,7 +86,7 @@ pipeline {
         stage('Release') {
             when {
                 expression {
-                    return params.branch == "origin/master"
+                    return params.branch == "origin/develop"
                 }
             }
             steps {
