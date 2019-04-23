@@ -103,7 +103,7 @@ pipeline {
         stage('Deploy Snapshots') {
             when {
                 expression {
-                    return params.branch == "origin/develop"
+                    return params.branch == "origin/artifact-working"
                 }
             }
             steps {
@@ -130,7 +130,7 @@ pipeline {
         stage('Release') {
             when {
                 expression {
-                    return params.branch == "origin/master"
+                    return params.branch == "origin/develop"
                 }
             }
             steps {
@@ -154,7 +154,7 @@ pipeline {
         stage('Promote to google cloud') {
             when {
                 expression {
-                    return params.promote == true
+                    return params.promote == true || params.branch == "origin/master"
                 }
             }
             steps {

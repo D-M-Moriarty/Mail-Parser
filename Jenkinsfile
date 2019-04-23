@@ -103,7 +103,7 @@ pipeline {
         stage('Deploy Snapshots') {
             when {
                 expression {
-                    return params.branch == "origin/develop"
+                    return params.branch == "origin/artifact-working"
                 }
             }
             steps {
@@ -114,7 +114,7 @@ pipeline {
                     rtMaven.tool = 'maven'
                     rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
                     rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
-                    rtMaven.run pom: 'pom.xml', goals: 'install -U', buildInfo: buildInfo
+                    rtMaven.run pom: 'pom.xml', goals: 'compile -U', buildInfo: buildInfo
                     publishBuildInfo server: server, buildInfo: buildInfo
                 }
             }
@@ -130,7 +130,7 @@ pipeline {
         stage('Release') {
             when {
                 expression {
-                    return params.branch == "origin/master"
+                    return params.branch == "origin/develop"
                 }
             }
             steps {
@@ -154,19 +154,19 @@ pipeline {
         stage('Promote to google cloud') {
             when {
                 expression {
-                    return params.promote == true
+                    return params.promote == true || params.branch == "origin/master"
                 }
             }
             steps {
-                dir('deployment'){
-                    ansiblePlaybook([
+                    dir('deployment'){
+                        ansiblePlaybook([
                             inventory   : 'hosts',
                             playbook    : 'create_vms_up_containers.yml',
                             installation: 'ansible',
                             hostKeyChecking: false,
                             colorized   : true
-                    ])
-                }
+                        ])
+                    }
             }
             post {
                 success {
@@ -180,18 +180,18 @@ pipeline {
 
     }
     post {
-        // only triggered when blue or green sign
-        success {
-            slackSend color: 'good', message: 'build success'
-        }
-        // triggered when red sign
-        failure {
-            slackSend color: 'bad', message: 'build failed'
-        }
-        // trigger every-works
-        always {
-            slackSend color: 'always', message: "${currentBuild.result}"
-        }
+           // only triggered when blue or green sign
+           success {
+               slackSend color: 'good', message: 'build success'
+           }
+           // triggered when red sign
+           failure {
+               slackSend color: 'bad', message: 'build failed'
+           }
+           // trigger every-works
+           always {
+               slackSend color: 'always', message: "${currentBuild.result}"
+           }
     }
 }
 
