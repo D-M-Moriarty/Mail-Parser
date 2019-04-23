@@ -62,7 +62,6 @@ public class PbmApiIT {
         when(pbmApiService.retrieveCustomerDetailsByEmail(anyString())).thenReturn(customerDetails);
         List<CustomerDetails> customerDetails2 = pbmApi.getCustomerDetailsByEmail(customerDetails.get(0).getEmail());
         Assert.assertEquals(customerDetails.get(0).getCustNo(), customerDetails2.get(0).getCustNo());
-        Assert.assertEquals(customerDetails.get(0).getCustNo(), "jim");
     }
 
     @Test
