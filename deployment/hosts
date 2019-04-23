@@ -1,0 +1,12 @@
+[all:vars]
+ansible_user=darren.m.moriarty
+
+[google_cloud]
+gcloud = ansible_host=35.185.208.213 ansible_port=2222
+
+[vagrant]
+vagrant1 ansible_host=127.0.0.1 ansible_port=2222
+vagrant2 ansible_host=127.0.0.1 ansible_port=2200
+vagrant3 ansible_host=127.0.0.1 ansible_port=2201
+
+
