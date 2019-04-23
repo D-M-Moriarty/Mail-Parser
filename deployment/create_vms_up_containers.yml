@@ -9,7 +9,7 @@
   tasks:
     - name: create multiple instances
       gce:
-        instance_names: qat,uat,prod, dev
+        instance_names: qat,uat,prod,dev
         zone: us-west1-b
         machine_type: n1-standard-1
         image: debian-9
