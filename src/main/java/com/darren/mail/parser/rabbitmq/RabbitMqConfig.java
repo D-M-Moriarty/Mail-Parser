@@ -28,11 +28,11 @@ public class RabbitMqConfig implements RabbitListenerConfigurer {
 
   private static final Logger logger = LoggerFactory.getLogger("pbmAppender");
 
-    @Value("${rabbit.rabbitmq.exchangename}")
+  @Value("${rabbit.rabbitmq.exchangename}")
   public String exchangeName;
-    @Value("${rabbit.rabbitmq.queuename}")
+  @Value("${rabbit.rabbitmq.queuename}")
   public String queueSpecificName;
-    @Value("${rabbit.rabbitmq.routingkey}")
+  @Value("${rabbit.rabbitmq.routingkey}")
   public String routingKey;
 
   @Bean

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @EnableConfigurationProperties(RabbitMqConfig.class)
 public class MailMessageSender {
 
-    private static final Logger logger = LoggerFactory.getLogger("pbmAppender");
+  private static final Logger logger = LoggerFactory.getLogger("pbmAppender");
 
   private final RabbitTemplate rabbitTemplate;
 

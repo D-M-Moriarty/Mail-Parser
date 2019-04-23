@@ -24,7 +24,7 @@ import java.util.List;
 @Service
 public class EmailParser {
 
-    private static final Logger logger = LoggerFactory.getLogger("pbmAppender");
+  private static final Logger logger = LoggerFactory.getLogger("pbmAppender");
 
   @Autowired
   private MailMessage mailMessage;
