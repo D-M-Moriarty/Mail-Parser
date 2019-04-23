@@ -1,0 +1,18 @@
+---
+- name: Install Required Packages
+  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+  become: True
+  with_items:
+    - python-pip
+    - python-dev
+    - libffi-dev
+    - libssl-dev
+
+- name: Install python packages
+  pip: pkg={{ item }} update_cache=yes cache_valid_time=3600
+  become: True
+  with_items:
+    - urllib3
+    - pyopenssl
+    - ndg-httpsclient
+    - pyasn1
