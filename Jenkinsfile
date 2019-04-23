@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 pipeline {
     environment {
         registry = "dmoriarty/pbm"
