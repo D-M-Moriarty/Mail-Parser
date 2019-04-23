@@ -22,7 +22,7 @@ import javax.mail.internet.MimeMessage;
 @EnableIntegration
 public class Mail {
 
-  private static final Logger logger = LoggerFactory.getLogger(Mail.class);
+  private static final Logger logger = LoggerFactory.getLogger("pbmAppender");
 
   @Autowired
   private EmailParser emailParser;

@@ -26,7 +26,7 @@ import org.springframework.messaging.handler.annotation.support.DefaultMessageHa
 @EnableConfigurationProperties
 public class RabbitMqConfig implements RabbitListenerConfigurer {
 
-  private static final Logger logger = LoggerFactory.getLogger(RabbitMqConfig.class);
+  private static final Logger logger = LoggerFactory.getLogger("pbmAppender");
 
     @Value("${rabbit.rabbitmq.exchangename}")
   public String exchangeName;
