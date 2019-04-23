@@ -86,7 +86,7 @@ pipeline {
         stage('Release') {
             when {
                 expression {
-                    return params.branch == "origin/master"
+                    return params.branch == "origin/develop"
                 }
             }
             steps {
