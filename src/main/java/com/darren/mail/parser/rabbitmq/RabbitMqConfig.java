@@ -22,17 +22,17 @@ import org.springframework.messaging.handler.annotation.support.DefaultMessageHa
 
 @Configuration
 @EnableRabbit
-@ConfigurationProperties(prefix = "pbm")
+@ConfigurationProperties(prefix = "rabbit")
 @EnableConfigurationProperties
 public class RabbitMqConfig implements RabbitListenerConfigurer {
 
-  private static final Logger logger = LoggerFactory.getLogger(RabbitMqConfig.class);
+  private static final Logger logger = LoggerFactory.getLogger("pbmAppender");
 
-  @Value("${pbm.rabbitmq.exchangename}")
+  @Value("${rabbit.rabbitmq.exchangename}")
   public String exchangeName;
-  @Value("${pbm.rabbitmq.queuename}")
+  @Value("${rabbit.rabbitmq.queuename}")
   public String queueSpecificName;
-  @Value("${pbm.rabbitmq.routingkey}")
+  @Value("${rabbit.rabbitmq.routingkey}")
   public String routingKey;
 
   @Bean

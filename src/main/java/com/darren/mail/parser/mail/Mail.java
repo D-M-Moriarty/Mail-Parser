@@ -3,10 +3,6 @@ package com.darren.mail.parser.mail;
 import com.darren.mail.parser.entity.MailMessage;
 import com.darren.mail.parser.serverproperties.MailProperties;
 import com.sun.mail.imap.protocol.FLAGS;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +13,16 @@ import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.mail.ImapIdleChannelAdapter;
 import org.springframework.integration.mail.ImapMailReceiver;
 
+import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 @Configuration
 @EnableIntegration
 public class Mail {
 
-  private static final Logger logger = LoggerFactory.getLogger(Mail.class);
+  private static final Logger logger = LoggerFactory.getLogger("pbmAppender");
 
   @Autowired
   private EmailParser emailParser;
