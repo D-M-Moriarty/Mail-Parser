@@ -50,6 +50,8 @@
         - "{{ ansible_hostname }}"
   tasks:
 
+    - debug: msg="{{ lookup('env','BUILD_TAG') }}"
+
     - name: Ansible copy docker-compose to remote servers
       copy:
         src: ../docker-compose.yml
@@ -68,4 +70,4 @@
         recreate: always
       environment:
         HOST: "{{ ansible_hostname }}"
-        RELEASE_VERSION: "{{ lookup('env','BUILD_NUMBER') }}"
+        RELEASE_VERSION: "{{ lookup('env','BUILD_TAG') }}"
