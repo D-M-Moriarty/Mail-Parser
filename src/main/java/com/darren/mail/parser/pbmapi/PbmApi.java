@@ -13,7 +13,7 @@ public class PbmApi {
 
     private PbmApiService pbmApiService;
 
-    private static final Logger logger = LoggerFactory.getLogger(PbmApi.class);
+    private static final Logger logger = LoggerFactory.getLogger("pbmAppender");
 
     public PbmApi() { }
 

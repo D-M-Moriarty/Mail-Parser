@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 pipeline {
     environment {
         registry = "dmoriarty/pbm"
@@ -26,7 +27,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean compile'
+                sh 'mvn clean install'
             }
             post {
                 success {

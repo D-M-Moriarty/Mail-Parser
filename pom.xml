@@ -313,6 +313,19 @@
       <artifactId>spring-boot-devtools</artifactId>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <groupId>com.splunk</groupId>
+      <artifactId>splunk</artifactId>
+      <version>1.5.0.0</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.splunk.logging/splunk-library-javalogging -->
+    <dependency>
+      <groupId>com.splunk.logging</groupId>
+      <artifactId>splunk-library-javalogging</artifactId>
+      <version>1.7.3</version>
+    </dependency>
+
   </dependencies>
 
   <!-- **** Build Plugins -->
