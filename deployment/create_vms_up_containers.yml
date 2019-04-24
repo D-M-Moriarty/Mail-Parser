@@ -65,11 +65,43 @@
 
     - name: docker compose up
       docker_service:
-        project_src: /home/darren.m.moriarty
         state: present
         recreate: always
-      environment:
-        HOST: "{{ ansible_hostname }}"
-        RELEASE_VERSION: 295
+        definition:
+          version: '3'
+          services:
+            pbm:
+              image: dmoriarty/pbm:"{{ lookup('env','BUILD_NUMBER') }}"
+                container_name: pbm
+                depends_on:
+                  - rabbitmq
+                environment:
+                  RABBITMQ_HOST_URL: rabbitmq
+                  SPRING_ACTIVE_PROFILE: "{{ ansible_hostname }}"
+                command: ["./wait-for-it.sh", "rabbitmq:5672"]
+                networks:
+                  - pbmnet
+                volumes:
+                  - ./target/classes/application.properties:/pbm/application.properties:ro
+                rabbitmq:
+                  image: rabbitmq:management
+                  container_name: rabbitmq
+                  ports:
+                    - 5672:5672
+                    - 15672:15672
+                  networks:
+                    - pbmnet
+                  volumes:
+                    - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
+              networks:
+                pbmnet:
+                  driver: bridge
+#      docker_service:
+#        project_src: /home/darren.m.moriarty
+#        state: present
+#        recreate: always
+#      environment:
+#        HOST: "{{ ansible_hostname }}"
+#        RELEASE_VERSION: "295"
 #        RELEASE_VERSION: "{{ lookup('env','BUILD_NUMBER') }}"
 #      command: echo "$RELEASE_VERSION is the release version"
