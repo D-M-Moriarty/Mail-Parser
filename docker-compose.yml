@@ -2,7 +2,7 @@ version: '3'
 services:
 
   pbm:
-    image: dmoriarty/pbm:${RELEASE_VERSION}
+    image: "dmoriarty/pbm:${RELEASE_VERSION}"
     container_name: pbm
     depends_on:
       - rabbitmq
