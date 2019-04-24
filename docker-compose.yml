@@ -2,18 +2,14 @@ version: '3'
 services:
 
   pbm:
-    image: dmoriarty/pbm:260
+    image: dmoriarty/pbm:262
     container_name: pbm
     depends_on:
       - rabbitmq
     environment:
-      - RABBITMQ_HOST_URL=rabbitmq
-      - SPRING_ACTIVE_PROFILE="${HOST}"
-    command: [
-      "./wait-for-it.sh",
-      "rabbitmq:5672",
-      "--spring.profiles.active='{HOST}'"
-    ]
+      RABBITMQ_HOST_URL: rabbitmq
+      SPRING_ACTIVE_PROFILE: "${HOST}"
+    command: ["./wait-for-it.sh", "rabbitmq:5672"]
     networks:
       - pbmnet
     volumes:
