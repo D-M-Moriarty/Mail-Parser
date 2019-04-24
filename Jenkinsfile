@@ -188,7 +188,6 @@ pipeline {
            // triggered when red sign
            failure {
                slackSend color: 'bad', message: 'build failed'
-               mail to: "team@darren.m.moriarty@students.ittralee.ie", subject: 'The Pipeline failed :('
            }
            // trigger every-works
            always {
