@@ -2,7 +2,7 @@ version: '3'
 services:
 
   pbm:
-    image: dmoriarty/pbm:262
+    image: dmoriarty/pbm:264
     container_name: pbm
     depends_on:
       - rabbitmq
