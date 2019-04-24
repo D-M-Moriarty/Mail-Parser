@@ -9,7 +9,11 @@ services:
     environment:
       - RABBITMQ_HOST_URL=rabbitmq
       - SPRING_ACTIVE_PROFILE="${HOST}"
-    command: ["./wait-for-it.sh", "rabbitmq:5672"]
+    command: [
+      "./wait-for-it.sh",
+      "rabbitmq:5672",
+      "--spring.profiles.active='{HOST}'"
+    ]
     networks:
       - pbmnet
     volumes:
