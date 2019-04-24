@@ -33,6 +33,10 @@
         name: default
         fwname: "my-firewall-rule"
         allowed: tcp:5672, 15672
+        service_account_email: "{{ service_account_email }}"
+        credentials_file: "{{ credentials_file }}"
+        project_id: "{{ project_id }}"
+        metadata: '{ "startup-script" : "apt-get update" }'
         state: "present"
         src_tags: "qat,uat,prod"
 
