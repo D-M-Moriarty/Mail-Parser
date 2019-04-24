@@ -2,13 +2,14 @@ version: '3'
 services:
 
   pbm:
-    image: "dmoriarty/pbm:${RELEASE_VERSION}"
+    image: dmoriarty/pbm:${RELEASE_VERSION}
     container_name: pbm
     depends_on:
       - rabbitmq
     environment:
       RABBITMQ_HOST_URL: rabbitmq
       SPRING_ACTIVE_PROFILE: "${HOST}"
+      RELEASE_VERSION: "${RELEASE_VERSION}"
     command: ["./wait-for-it.sh", "rabbitmq:5672"]
     networks:
       - pbmnet
