@@ -14,22 +14,11 @@
         machine_type: n1-standard-1
         image: debian-9
         state: present
-        tags:
-          - instances
         service_account_email: "{{ service_account_email }}"
         credentials_file: "{{ credentials_file }}"
         project_id: "{{ project_id }}"
         metadata: '{ "startup-script" : "apt-get update" }'
       register: gce
-
-    # Create Firewall Rule with Source Tags
-    - name: Create Firewall Rule w/Source Tags
-      gce_net:
-        name: default
-        fwname: "my-firewall-rule"
-        allowed: tcp:5672
-        state: "present"
-        src_tags: "instances"
 
     - name: Save host data
       add_host:
