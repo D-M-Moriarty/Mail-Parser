@@ -14,6 +14,7 @@
         machine_type: n1-standard-1
         image: debian-9
         state: present
+        tags: qat,uat,prod
         service_account_email: "{{ service_account_email }}"
         credentials_file: "{{ credentials_file }}"
         project_id: "{{ project_id }}"
@@ -25,6 +26,15 @@
         hostname: "{{ item.public_ip }}"
         groupname: gce_instances_ips
       with_items: "{{ gce.instance_data }}"
+
+    # Create Firewall Rule with Source Tags
+    - name: Create Firewall Rule w/Source Tags
+      gce_net:
+        name: default
+        fwname: "my-firewall-rule"
+        allowed: tcp:5672, 15672
+        state: "present"
+        src_tags: "qat,uat,prod"
 
     - name: Wait for SSH for instances
       wait_for:
