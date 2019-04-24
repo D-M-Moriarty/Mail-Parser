@@ -183,7 +183,6 @@ pipeline {
            // only triggered when blue or green sign
            success {
                slackSend color: 'good', message: 'build success'
-               mail to: "team@darren.m.moriarty@students.ittralee.ie", subject: 'The Pipeline passed'
            }
            // triggered when red sign
            failure {
