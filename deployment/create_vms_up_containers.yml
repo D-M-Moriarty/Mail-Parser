@@ -70,4 +70,6 @@
         recreate: always
       environment:
         HOST: "{{ ansible_hostname }}"
-        RELEASE_VERSION: "{{ lookup('env','BUILD_NUMBER') }}"
+        RELEASE_VERSION: 295
+#        RELEASE_VERSION: "{{ lookup('env','BUILD_NUMBER') }}"
+#      command: echo "$RELEASE_VERSION is the release version"
