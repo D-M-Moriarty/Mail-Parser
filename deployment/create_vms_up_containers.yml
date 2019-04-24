@@ -6,8 +6,6 @@
     credentials_file: "~/my_account.json"
     project_id: "t-isotope-161616"
     auth_kind: serviceaccount
-    release_version: "{{ lookup('env','BUILD_NUMBER') }}"
-    hostname: "{{ ansible_hostname }}"
   tasks:
     - name: create multiple instances
       gce:
@@ -71,5 +69,5 @@
         state: present
         recreate: always
       environment:
-        HOST: hostname
-        RELEASE_VERSION: release_version
+        HOST: "{{ ansible_hostname }}"
+        RELEASE_VERSION: "{{ lookup('env','BUILD_NUMBER') }}"
