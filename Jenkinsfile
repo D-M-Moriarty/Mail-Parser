@@ -131,7 +131,7 @@ pipeline {
         stage('Release') {
             when {
                 expression {
-                    return params.branch == "origin/develop"
+                    return params.branch == "origin/develop" || params.promote == true || params.branch == "origin/master"
                 }
             }
             steps {

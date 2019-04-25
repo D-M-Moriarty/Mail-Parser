@@ -1,4 +1,4 @@
-[all:vars]
+≤[all:vars]
 ansible_user=darren.m.moriarty
 
 [google_cloud]
