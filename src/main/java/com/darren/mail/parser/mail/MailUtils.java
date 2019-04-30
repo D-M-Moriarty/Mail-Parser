@@ -62,7 +62,7 @@ public class MailUtils {
 
   public static List<String> extractCustMatches(String subjectLine) {
     List<String> custNos = new ArrayList<>();
-    String expression = "\\[#\\d{9}]";
+    String expression = "\\[#\\d{8}]";
     Pattern pattern = Pattern.compile(expression);
     Matcher matcher = pattern.matcher(subjectLine);
     while (matcher.find()) {
