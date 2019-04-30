@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean compile'
             }
             post {
                 success {
@@ -135,6 +135,8 @@ pipeline {
             }
             steps {
                 script {
+                    sh 'mvn install'
+
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                     docker.withRegistry( '', registryCredential ) {
                         dockerImage.push()
