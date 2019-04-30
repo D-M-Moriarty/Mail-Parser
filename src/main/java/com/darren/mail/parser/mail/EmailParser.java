@@ -153,4 +153,5 @@ public class EmailParser {
     mailAttachment.setFileData(IOUtils.toByteArray(p.getInputStream()));
     mailMessage.addAttachment(mailAttachment);
   }
+
 }

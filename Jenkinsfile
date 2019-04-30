@@ -1,4 +1,3 @@
-#!/usr/bin/env groovy
 pipeline {
     environment {
         registry = "dmoriarty/pbm"
@@ -131,7 +130,7 @@ pipeline {
         stage('Release') {
             when {
                 expression {
-                    return params.branch == "origin/develop" || params.promote == true || params.branch == "origin/master"
+                    return params.promote == true || params.branch == "origin/master" || params.branch == "origin/develop"
                 }
             }
             steps {
